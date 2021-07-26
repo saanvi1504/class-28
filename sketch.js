@@ -36,17 +36,13 @@ function setup(){
 
     bird = new Bird(100,100);
 
-    log6 = new Log(100,100,100, PI/5)
-
-    chain = new Chain(bird.body,log6.body)
+    chain = new Chain(bird.body,{x:200,y:100})
 }
 
 function draw(){
     background(backgroundImg);
     Engine.update(engine);
-    console.log(box2.body.position.x);
-    console.log(box2.body.position.y);
-    console.log(box2.body.angle);
+
     box1.display();
     box2.display();
     ground.display();
@@ -64,8 +60,15 @@ function draw(){
 
     bird.display();
     
-    log6.display();
     chain.display();
     
     platform.display();
+}
+
+function mouseDragged(){
+    Matter.Body.setPosition(bird.body,{x:mouseX,y:mouseY})
+}
+
+function mouseReleased(){
+    chain.birdRelease()
 }

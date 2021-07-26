@@ -1,18 +1,24 @@
 class Chain {
-    constructor(bodyA,bodyB){
+    constructor(bodyA,pointB){
         var options = {
             bodyA:bodyA,
-            bodyB:bodyB,
+            pointB:pointB,
             length:30,
             stiffness:0.2 
         }
+        this.pointB = pointB
         this.chain = Matter.Constraint.create(options)
         World.add(world,this.chain)
     }
     display (){
-     var pointA = this.chain.bodyA.position
-     var pointB = this.chain.bodyB.position
-     strokeWeight(4)
-     line(pointA.x, pointA.y, pointB.x, pointB.y)  
+     if(this.chain.bodyA!==null){
+        var pointA = this.chain.bodyA.position
+        var pointB = this.pointB
+        strokeWeight(4)
+        line(pointA.x, pointA.y, pointB.x, pointB.y)  
+     }
+    }
+    birdRelease (){
+        this.chain.bodyA = null
     }
 }
